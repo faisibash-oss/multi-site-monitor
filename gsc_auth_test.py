@@ -1,4 +1,5 @@
 import os
+import sys
 
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
@@ -7,13 +8,12 @@ from googleapiclient.discovery import build
 
 SCOPES = ["https://www.googleapis.com/auth/webmasters.readonly"]
 CREDENTIALS_FILE = "credentials.json"
-TOKEN_FILE = "token_aireadypage.json"
 
 
-def get_credentials():
+def get_credentials(token_file):
     creds = None
-    if os.path.exists(TOKEN_FILE):
-        creds = Credentials.from_authorized_user_file(TOKEN_FILE, SCOPES)
+    if os.path.exists(token_file):
+        creds = Credentials.from_authorized_user_file(token_file, SCOPES)
 
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
@@ -22,14 +22,19 @@ def get_credentials():
             flow = InstalledAppFlow.from_client_secrets_file(CREDENTIALS_FILE, SCOPES)
             creds = flow.run_local_server(port=0)
 
-        with open(TOKEN_FILE, "w") as token:
+        with open(token_file, "w") as token:
             token.write(creds.to_json())
 
     return creds
 
 
 def main():
-    creds = get_credentials()
+    label = sys.argv[1] if len(sys.argv) > 1 else "aireadypage"
+    token_file = f"token_{label}.json"
+
+    print(f"Running for site label: {label} (token file: {token_file})")
+
+    creds = get_credentials(token_file)
     service = build("searchconsole", "v1", credentials=creds)
 
     site_list = service.sites().list().execute()

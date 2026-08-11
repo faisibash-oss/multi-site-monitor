@@ -1,6 +1,10 @@
 # multi-site-monitor
 
-Small test script for the Google PageSpeed Insights (PSI) API.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+An MCP server that pulls PageSpeed Insights and Google Search Console (GSC) data across multiple owned sites, letting Claude synthesize cross-site reports.
+
+Currently includes a test script for the Google PageSpeed Insights (PSI) API.
 
 ## Setup
 

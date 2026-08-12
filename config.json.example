@@ -3,5 +3,10 @@
     "aireadypage": "",
     "tracycarpetcare": "",
     "hypicsmodapk": ""
+  },
+  "site_economics": {
+    "aireadypage": { "monthly_cost": 0, "monthly_revenue": 0, "notes": "" },
+    "tracycarpetcare": { "monthly_cost": 0, "monthly_revenue": 0, "notes": "" },
+    "hypicsmodapk": { "monthly_cost": 0, "monthly_revenue": 0, "notes": "" }
   }
 }
